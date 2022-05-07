@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Migros_Sanal_Market.ViewModels"
+             x:Class="Migros_Sanal_Market.Views.ProductView"
+             Title="Kategoriler">
+
+    <ContentPage.BindingContext>
+        <vm:CategoriesViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <CollectionView ItemsSource="{Binding Kategorilers}"
+                            SelectionChanged="CollectionView_SelectionChanged"
+                            SelectionMode="Single"
+                            x:Name="Categories">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"
+                                     VerticalItemSpacing="5"/>
+                    <!-- Kategori resimleri arasındaki dikey boşluk-->
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ImageButton Source="{Binding ImageUrl}" Aspect="AspectFill"
+                                         x:Name="Kategoriler"
+                                         WidthRequest="90" HeightRequest="90"
+                                         Grid.Column="0"
+                                         />
+                            <StackLayout Orientation="Horizontal" Grid.Column="1">
+                                <Label Text ="{Binding CategoryName}" 
+                                       TextColor="OliveDrab" 
+                                       VerticalTextAlignment="Center" 
+                                       FontAttributes="Bold" 
+                                       FontSize="Subtitle"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
